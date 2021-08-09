@@ -1,0 +1,23 @@
+---
+# tasks file for httpdrole
+- name: ensure httpd installed
+  yum:
+          name: httpd
+          state: latest
+
+
+- name: start and enable 
+  service:
+          name: httpd
+          state: started
+          enabled: true
+
+
+- name: copying the website template
+  copy:
+          src: /var/www/html/index.html
+          dest: /var/www/html/index.html
+  notify:
+          - restart httpd
+
+
